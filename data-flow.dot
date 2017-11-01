@@ -1,6 +1,6 @@
 digraph d {
     farm [label="Farm"];
-    farmer [label="Farmer"];
+    farmer [label="Farmer", style=filled, fillcolor="lightgrey"];
     prod [label="Produce"];
     commt [label="Health\nCheckup"];
     tox [label="Toxicology"];
@@ -12,20 +12,9 @@ digraph d {
     prod -> tox [label="test"];
     prod -> microbe [label="test"];
     farmer -> prod [label="produces", color="blue"];
-    farmer -> farm [label="owns", color="blue"];
+    farmer -> farm [label="owns/works at", color="blue"];
     farm -> prod [label="grows", color="blue"];
-    farmrec [shape=record, label="{Farm|<f0> id|<f1> farmerID|lat|long|address|size|...}"];
-    farmerrec [shape=record, label="{Farmer|<f0> id|name|gender|age|<f1> farmID|...}"];
-    healthrec [shape=record, label="{Health|<f0> farmerID|commtID|...}"];
-    prodrec [shape=record, label="{Produce|<f0> id|<f3>prodID|<f1>farmerID|<f2>farmID|...}"];
-    commtrec [shape=record, label="{LabTest|<f0> farmerID|gluc|chol|...}"];
-    farmerrec:<f0> -> healthrec:<f0> [color="green"];
-    healthrec:<f0> -> commtrec:<f0> [color="green"];
-    farmerrec:<f1> -> farmrec:f1 [color="green"];
-    farmerrec:<f0> -> prodrec:f1 [color="green"];
-    farmrec:<f0> -> prodrec:f2 [color="green"];
-    prodinforec [shape=record, label="{<f0>id|name|type|...}"];
-    prodrec:f3 -> prodinforec:f0 [color="green"];
+    farm -> pest [label="uses"];
 }
 
 use of pesticides: types, frequency,

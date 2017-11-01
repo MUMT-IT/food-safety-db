@@ -1,0 +1,32 @@
+digraph G {
+    rankdir=LR;
+    farm [shape=record, label="Farm|<f0> farmID|<f1> farmerID|lat|long|address|size|..."];
+    farmlist [shape=record, label="FarmList|<f0> farmlistID|<f1> farmerID|<f2>farmID|..."];
+    farmer [shape=record, label="Farmer|<f0> farmerID|name|gender|age|<f1> farmlistID|..."];
+    prodlist [shape=record, label="ProduceList|<f0> producelistID|<f3>prodID|<f1>farmerID|<f2>farmID|..."];
+    labresult [shape=record, label="LabTestResult|<f1> labtestID|date|gluc|chol|...", style=filled, fillcolor="lightgrey"];
+    labtestlist [shape=record, label="LabTestList|<f0>labtestID|<f1>farmerID|date|..."];
+    toxresult [shape=record, label="ToxResult|<f0>toxresultID|<f1>labtestID|...", style=filled, fillcolor="lightgrey"];
+    pestlist [shape=record, label="PesticideList|<f0> pestlistID|<f1> pesticideID|<f2>farmID|date|..."];
+    pesticide [shape=record, label="Pesticide|<f0> pesticideID|name|group|toxicity|..."];
+    prod [shape=record, label="Produce|<f0>prodID|<f1>prodtypeID|..."];
+    prodtype [shape=record, label="ProduceType|<f0>prodtypeID|name|type|..."];
+    prodtest [shape=record, label="ProdTestResult|<f0> ptresultID|<f1> prodID|date|...", style=filled, fillcolor="lightgrey"];
+    prodtoxresult [shape=record, label="ProdToxResult|<f0>toxresultID|<f1>ptresultID|...", style=filled, fillcolor="lightgrey"];
+    prodmicroresult [shape=record, label="ProdMicroResult|<f0>microresultID|<f1>ptresultID|...", style=filled, fillcolor="lightgrey"];
+    prodpestresult [shape=record, label="ProdPesticideResult|<f0>pestresultID|<f1>ptresultID|...", style=filled, fillcolor="lightgrey"];
+    farmer:<f0> -> labtestlist:<f1>;
+    labtestlist:f0 -> labresult:f1;
+    toxresult:f1 -> labresult:f1;
+    farmer:<f1> -> farmlist:f0;
+    farm:<f0> -> prodlist:f2;
+    farm:f0 -> pestlist:f2;
+    prodlist:f3 -> prod:f0;
+    prod:f1 -> prodtype:f0;
+    farmlist:f2 -> farm:f0;
+    prodlist:f3 -> prodtest:f1;
+    prodtest:f0 -> prodtoxresult:f1;
+    prodtest:f0 -> prodmicroresult:f1;
+    prodtest:f0 -> prodpestresult:f1;
+    pestlist:f1 -> pesticide:f0;
+}
