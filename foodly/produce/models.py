@@ -24,6 +24,9 @@ class Farm(models.Model):
     estimated_leased_size = models.DecimalField(blank=True, null=True,
                         max_digits=5, decimal_places=2)
     duration = models.IntegerField(blank=True, null=True)
+    agritype = models.ForeignKey("AgriType", null=True,
+            on_delete=models.SET_NULL, related_name='farms',
+            related_query_name='farm')
 
     def __unicode__(self):
         return u"Estimated size={}".format(self.estimated_size)
